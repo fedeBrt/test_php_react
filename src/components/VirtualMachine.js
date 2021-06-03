@@ -1,14 +1,23 @@
 import React from "react";
-import { Line, Bar, char} from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 
 export default function VirtualMachine(props) {
+// I need only the last 60 results that corresponds to that IP
+//console.log(props.vm[0].dateAndTime);
+const dateAndTime = props.vm.map((virtualMachine, index) => (
+  virtualMachine.dateAndTime
+))
+const cpu = props.vm.map((virtualMachine, index) => (
+  virtualMachine.cpu
+))
 
+//console.log([vmData]);
     const dataCpu = {
-        labels: ["Min1", "Min2", "Min3", "Min4", "Min5", "....Min60"],
+        labels: dateAndTime,
         datasets: [
           {
             label: "CPU",
-            data: [33, 53, 85, 41, 44, 65],
+            data: cpu,
             fill: false,
             borderColor: "rgba(75,192,192,1)"
           },
@@ -26,7 +35,7 @@ export default function VirtualMachine(props) {
           }
         ]
       };
-
+    // I need only the last result
       const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -76,15 +85,15 @@ export default function VirtualMachine(props) {
 
       <div className="details">
         <div className="cpu">
-            <p>CPU: {props.vm.authors[0]}</p>
+            <p>CPU: {props.vm.cpu}</p>
             <div><Line data={dataCpu}/></div>
         </div>
         <div className="memory">
-            <p>Memory: {props.vm.numberOfPages}</p>
+            <p>Memory: {props.vm.mem}</p>
             <div><Line data={dataMemory} /></div>
         </div>
         <div className="jobProgress">
-            <p>Job in Progress: {props.vm.country}</p>
+            <p>Job in Progress and Queued Jobs: {props.vm.inProgressJobs}</p>
             <div>
             <Bar
                 data={data}
@@ -94,18 +103,6 @@ export default function VirtualMachine(props) {
             />
             </div>
             
-        </div>
-
-        <div className="queuedJobs">
-            <p>Queued Jobs: {props.vm.released}</p>
-            <div>
-            <Bar
-                data={data}
-                width={null}
-                height={null}
-                options={options}
-            />
-            </div>
         </div>
     </div>
 

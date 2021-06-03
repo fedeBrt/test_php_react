@@ -23,34 +23,35 @@ class App extends React.Component {
   }
 
   getApiData() {
-    const apiURL = "https://www.anapioficeandfire.com/api/books?pageSize=30";
+    const apiURL = "http://localhost/php_test/";
 
-  /*  axios.get(apiURL).then((resp) => {
+    axios.get(apiURL).then((resp) => {
       this.setState({ virtualMachines: resp.data });
-      console.log(resp.data);
-    });*/
+     // console.log(resp.data);
+    });
 
-    axios.get(apiURL ,{
+    /*axios.get(apiURL ,{
       params: {
-        _limit: 1
+        maxResults: 1
       }
     })
     .then((resp) => {
       this.setState({
         virtualMachines: resp.data
       });
-    })
+    })*/
   }
 
   componentDidMount() {
     //rerender component every minute (60000 ms)
     this.interval = setInterval(() => this.setState({ time: Date.now() }), 60000);
     this.getApiData();
+    //console.log(this.state.virtualMachines);
   }
 
-  componentWillUnmount() {
+  /*componentWillUnmount() {
     clearInterval(this.interval);
-  }
+  }*/
 
   render() {
     return (
@@ -59,19 +60,17 @@ class App extends React.Component {
         <h2>Updated data every minute</h2>
         {/* Fetch data from API */}
         <div>
-         {/*} <button className="fetch-button" onClick={this.getBooksData}>
-            Fetch Data
-    </button>*/}
           <br />
         </div>
         {/* Display data from API */}
       <div className="virtualMachines">
-       {this.state.virtualMachines.map((vm, index) => (
-          <div className="virtualMachine" key={index} >
+      <VirtualMachine vm={this.state.virtualMachines} />  
+      {/*   {this.state.virtualMachines.map((vm, index) => (
+          <div className="virtualMachine" key={index} > 
           <VirtualMachine vm={vm} />  
           </div>
-        ))} 
-      </div>
+        ))} */}
+       </div>
       </div>
     );
   }
