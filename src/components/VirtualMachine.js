@@ -3,13 +3,26 @@ import { Line, Bar } from "react-chartjs-2";
 
 export default function VirtualMachine(props) {
 // I need only the last 60 results that corresponds to that IP
-//console.log(props.vm[0].dateAndTime);
+console.log(props.vm.cpu);
 const dateAndTime = props.vm.map((virtualMachine, index) => (
   virtualMachine.dateAndTime
 ))
 const cpu = props.vm.map((virtualMachine, index) => (
   virtualMachine.cpu
 ))
+
+const mem = props.vm.map((virtualMachine, index) => (
+  virtualMachine.mem
+))
+
+/*const inProgresJobs = props.vm.map((virtualMachine, index) => (
+  virtualMachine.inProgresJobs
+))
+
+const queuedJobs = props.vm.map((virtualMachine, index) => (
+  virtualMachine.queuedJobs
+))*/
+
 
 //console.log([vmData]);
     const dataCpu = {
@@ -19,45 +32,49 @@ const cpu = props.vm.map((virtualMachine, index) => (
             label: "CPU",
             data: cpu,
             fill: false,
-            borderColor: "rgba(75,192,192,1)"
-          },
+            borderColor: "rgba(75,192,192,1)",
+            writable: true
+          }
         ]
       };
 
-    const dataMemory = {
-        labels: ["Min1", "Min2", "Min3", "Min4", "Min5", "....Min60"],
+    var dataMemory = {
+        labels: dateAndTime,
         datasets: [
           {
             label: "Memory",
-            data: [props.vm.numberOfPages, 25, 35, 51, 54, 76],
+            data: mem,
             fill: false,
             borderColor: "#742774"
           }
         ]
+
+        
       };
+
     // I need only the last result
-      const data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    /*  const dataJobs = {
+            labels: dateAndTime[0],
             datasets: [
               {
-                label: 'My First dataset',
+                label: 'Jobs in Progress',
                 backgroundColor: 'rgba(255,99,132,0.2)',
                 borderColor: 'rgba(255,99,132,1)',
                 borderWidth: 1,
                 stack: 1,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                 hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: inProgresJobs[0]
               },
               {
-                label: 'My second dataset',
+                label: 'Queued Jobs',
                 backgroundColor: 'rgba(155,231,91,0.2)',
                 borderColor: 'rgba(255,99,132,1)',
                 borderWidth: 1,
                 stack: 1,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                 hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [45, 79, 10, 41, 16, 85, 20]
+                data: queuedJobs[0]
               }
             ]
         };
@@ -76,7 +93,7 @@ const cpu = props.vm.map((virtualMachine, index) => (
                 stacked: true
             }]
         }
-    }
+    }*/
 
   return (
     <div className="virtualMachine">
@@ -85,33 +102,26 @@ const cpu = props.vm.map((virtualMachine, index) => (
 
       <div className="details">
         <div className="cpu">
-            <p>CPU: {props.vm.cpu}</p>
+            <p>CPU: </p>
             <div><Line data={dataCpu}/></div>
         </div>
         <div className="memory">
-            <p>Memory: {props.vm.mem}</p>
+            <p>Memory:</p>
             <div><Line data={dataMemory} /></div>
         </div>
         <div className="jobProgress">
-            <p>Job in Progress and Queued Jobs: {props.vm.inProgressJobs}</p>
+            <p>Job in Progress and Queued Jobs:</p>
             <div>
-            <Bar
-                data={data}
+           {/* <Bar
+                data={dataJobs}
                 width={null}
                 height={null}
                 options={options}
-            />
+           /> */}
             </div>
             
         </div>
     </div>
-
-      {/* <div className="details">
-        <p>👨: {props.vm.authors[0]}</p>
-        <p>📖: {props.vm.numberOfPages} pages</p>
-        <p>🏘️: {props.vm.country}</p>
-        <p>⏰: {props.vm.released}</p>
-  </div> */}
     </div>
   );
 }

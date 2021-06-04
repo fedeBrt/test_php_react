@@ -26,20 +26,9 @@ class App extends React.Component {
     const apiURL = "http://localhost/php_test/";
 
     axios.get(apiURL).then((resp) => {
-      this.setState({ virtualMachines: resp.data });
-     // console.log(resp.data);
+      this.setState({ virtualMachines: resp.data});
+     console.log(resp.data);
     });
-
-    /*axios.get(apiURL ,{
-      params: {
-        maxResults: 1
-      }
-    })
-    .then((resp) => {
-      this.setState({
-        virtualMachines: resp.data
-      });
-    })*/
   }
 
   componentDidMount() {
@@ -64,12 +53,13 @@ class App extends React.Component {
         </div>
         {/* Display data from API */}
       <div className="virtualMachines">
-      <VirtualMachine vm={this.state.virtualMachines} />  
-      {/*   {this.state.virtualMachines.map((vm, index) => (
-          <div className="virtualMachine" key={index} > 
-          <VirtualMachine vm={vm} />  
+    <VirtualMachine vm={this.state.virtualMachines} />  
+      {/*{this.state.virtualMachines.map((vm, index) => (
+          <div className="virtualMachine" > 
+               <VirtualMachine key={index} vm={vm}  />  
           </div>
-        ))} */}
+       ))}*/}
+      
        </div>
       </div>
     );
