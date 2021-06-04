@@ -4,22 +4,22 @@ import { Line, Bar } from "react-chartjs-2";
 export default function VirtualMachine(props) {
 
 console.log(props.vm.cpu);
-const dateAndTime = props.vm.map((virtualMachine, index) => (
+const dateAndTime = props.vm.map((virtualMachine) => (
   virtualMachine.dateAndTime
 ))
-const cpu = props.vm.map((virtualMachine, index) => (
+const cpu = props.vm.map((virtualMachine) => (
   virtualMachine.cpu
 ))
 
-const mem = props.vm.map((virtualMachine, index) => (
+const mem = props.vm.map((virtualMachine) => (
   virtualMachine.mem
 ))
 
-const inProgresJobs = props.vm.map((virtualMachine, index) => (
+const inProgresJobs = props.vm.map((virtualMachine) => (
   virtualMachine.inProgresJobs
 ))
 
-const queuedJobs = props.vm.map((virtualMachine, index) => (
+const queuedJobs = props.vm.map((virtualMachine) => (
   virtualMachine.queuedJobs
 ))
 
