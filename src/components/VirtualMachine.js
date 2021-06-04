@@ -2,7 +2,7 @@ import React from "react";
 import { Line, Bar } from "react-chartjs-2";
 
 export default function VirtualMachine(props) {
-// I need only the last 60 results that corresponds to that IP
+
 console.log(props.vm.cpu);
 const dateAndTime = props.vm.map((virtualMachine, index) => (
   virtualMachine.dateAndTime
@@ -15,16 +15,14 @@ const mem = props.vm.map((virtualMachine, index) => (
   virtualMachine.mem
 ))
 
-/*const inProgresJobs = props.vm.map((virtualMachine, index) => (
+const inProgresJobs = props.vm.map((virtualMachine, index) => (
   virtualMachine.inProgresJobs
 ))
 
 const queuedJobs = props.vm.map((virtualMachine, index) => (
   virtualMachine.queuedJobs
-))*/
+))
 
-
-//console.log([vmData]);
     const dataCpu = {
         labels: dateAndTime,
         datasets: [
@@ -52,8 +50,8 @@ const queuedJobs = props.vm.map((virtualMachine, index) => (
         
       };
 
-    // I need only the last result
-    /*  const dataJobs = {
+  
+    const dataJobs = {
             labels: dateAndTime[0],
             datasets: [
               {
@@ -93,7 +91,7 @@ const queuedJobs = props.vm.map((virtualMachine, index) => (
                 stacked: true
             }]
         }
-    }*/
+    }
 
   return (
     <div className="virtualMachine">
@@ -112,12 +110,12 @@ const queuedJobs = props.vm.map((virtualMachine, index) => (
         <div className="jobProgress">
             <p>Job in Progress and Queued Jobs:</p>
             <div>
-           {/* <Bar
-                data={dataJobs}
-                width={null}
-                height={null}
-                options={options}
-           /> */}
+            <Bar
+                  data={dataJobs}
+                  width={null}
+                  height={null}
+                  options={options}
+            />
             </div>
             
         </div>
